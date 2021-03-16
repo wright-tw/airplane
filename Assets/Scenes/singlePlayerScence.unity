@@ -261,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -2.14, z: -1}
+  m_LocalPosition: {x: 0.03, y: -2.1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 1804530443}
   - component: {fileID: 1804530445}
   m_Layer: 0
-  m_Name: down_wall
+  m_Name: downWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 1930311946}
   - component: {fileID: 1930311948}
   m_Layer: 0
-  m_Name: left_wall
+  m_Name: leftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 1936967846}
   - component: {fileID: 1936967848}
   m_Layer: 0
-  m_Name: cancel_wall
+  m_Name: cancelWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1936967845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3801eb1aade9d417e9b9ecfd46e50cde, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d8e6ed0f264841dca1314175f64a711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2042655156
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 2042655157}
   - component: {fileID: 2042655159}
   m_Layer: 0
-  m_Name: right_wall
+  m_Name: rightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
