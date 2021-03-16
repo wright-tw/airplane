@@ -16,8 +16,12 @@ public class background : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		this.monsterHandle();
+	}
+
+	private void monsterHandle()
+	{
 		time += Time.deltaTime; //時間增加
-		
 		if (time > 0.5f) //如果時間大於0.5(秒)
 		{
 			// 宣告位置pos，Random.Range(-2.5f,2.5f)代表X是2.5到-2.5之間隨機
@@ -29,6 +33,5 @@ public class background : MonoBehaviour
 			//時間歸零
 			time = 0f; 
 		}
-
 	}
 }
