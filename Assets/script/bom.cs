@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class bom : MonoBehaviour
+{
+	// Start is called before the first frame update
+	void Start()
+	{
+
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
+
+	void AnimationEnd()
+	{
+		Destroy (gameObject); //消滅物件
+	}
+}
