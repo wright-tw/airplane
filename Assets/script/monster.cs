@@ -16,7 +16,7 @@ public class monster : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		gameObject.transform.position += new Vector3(0, -0.01f, 0);
+		gameObject.transform.position += new Vector3(0, -0.03f, 0);
 	}
 
 	void OnTriggerEnter2D(Collider2D col) //名為col的觸發事件
@@ -27,13 +27,17 @@ public class monster : MonoBehaviour
 			Destroy(gameObject); //消滅物件本身
 			if (col.tag == "Bullet") //如果碰撞的標籤是Ship
 			{
-				Instantiate(explo, col.gameObject.transform.position, col.gameObject.transform.rotation);
 				//在碰撞物件的位置產生爆炸，也就是在太空船的位置產生爆炸
+				Instantiate(explo, col.gameObject.transform.position, col.gameObject.transform.rotation);
+				
+				// 加分
+				background.Instance.AddScore();
 			}
 			if (col.tag == "Player") //如果碰撞的標籤是Ship
 			{
 				Instantiate(bigexplo, col.gameObject.transform.position, col.gameObject.transform.rotation);
-				//在碰撞物件的位置產生爆炸，也就是在太空船的位置產生爆炸
+				// gameover
+				background.Instance.GameOver();
 			}
 		}
 

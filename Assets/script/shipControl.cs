@@ -41,7 +41,7 @@ public class shipControl : MonoBehaviour
         {
             if (time > fireSpeed)
             {
-                Vector3 pos = gameObject.transform.position + new Vector3(0, 0.3f, 0);
+                Vector3 pos = gameObject.transform.position + new Vector3(0.05f, 0.5f, 0);
                 Instantiate(Bullet, pos, gameObject.transform.rotation);
 
                 //時間歸零
