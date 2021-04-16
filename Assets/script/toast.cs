@@ -8,10 +8,8 @@ public class Toast
 	{
 		CanvasGroup tipCanvasGroup = obj.GetComponentInChildren<CanvasGroup>();
 		tipCanvasGroup.GetComponentInChildren<Text>().text = msg;
-		tipCanvasGroup.alpha = 1;
-		
+		tipCanvasGroup.alpha = 0;
 		DOTween.Kill(tipCanvasGroup);
-
 		Sequence sequence = DOTween.Sequence();
 		sequence.target = tipCanvasGroup;
 		sequence.Append(tipCanvasGroup.DOFade(1, 0.8f));
