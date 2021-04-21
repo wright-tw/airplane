@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; //使用UI
-using UnityEngine.Networking;
-using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class background : MonoBehaviour
 {
@@ -24,8 +23,9 @@ public class background : MonoBehaviour
 	public GameObject QuitButton; //宣告QuitButton的物件
 	public GameObject UsernameText;
 	public GameObject PasswordText;
-
 	public GameObject ToastBox;
+
+	private string token = "";
 
 	// Start is called before the first frame update
 	void Start()
@@ -51,52 +51,15 @@ public class background : MonoBehaviour
 		ScoreText.text = "Score: " + Score; // 更改ScoreText的內容
 	}
 
-	private bool LoginServer(string username, string password)
-	{
-		// 做表單參數
-		WWWForm form = new WWWForm();
-		form.AddField("username", username);
-		form.AddField("password", password);
-
-		// 製作請求物件
-		UnityWebRequest request =  UnityWebRequest.Post("http://127.0.0.1:1234/reg-or-login", form);
-		request.SendWebRequest();
-
-		// 等待回覆
-		while (! request.isDone) {}
-
-		// 檢測有無網路錯誤
-		if (request.isHttpError || request.isNetworkError) {
-			Debug.LogError (request.error);
-			return false;
-		}
-
-		// 處理回覆
-		string response = request.downloadHandler.text;
-		Debug.Log(response);
-
-		var responseData = JsonConvert.DeserializeObject<EmptyDataResponse>(response);
-		if (responseData.code == 1)
-		{
-			Debug.Log("RegDone");
-			return true;
-		}
-		else
-		{
-			Debug.LogError("RegStatusError");
-			return false;
-		}
-
-	}
-
 	public void GameStart()
 	{
 		string usernameString = UsernameText.GetComponentInChildren<InputField>().text;
 		string passwordString = PasswordText.GetComponentInChildren<InputField>().text;
-		bool done = LoginServer(usernameString, passwordString);
-
-		if (done)
+		string token = GameServer.LoginServer(usernameString, passwordString);
+		Debug.Log(token);
+		if (token != "")
 		{
+			this.token = token;
 			Toast.alert(ToastBox, "Login Done!");
 			changeUIToPlay();
 		}
@@ -106,7 +69,7 @@ public class background : MonoBehaviour
 		}
 	}
 
-	private void changeUIToPlay()
+	public void changeUIToPlay()
 	{
 		IsPlaying = true; //設定IsPlaying為true，代表遊戲正在進行中
 		GameTitle.SetActive (false); //不顯示GameTitle
@@ -118,7 +81,8 @@ public class background : MonoBehaviour
 
 	public void ResetGame() //RestartButton的功能
 	{
-		Application.LoadLevel (Application.loadedLevel); //讀取關卡(已讀取的關卡)
+		// restart scene
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	public void QuitGame() //QuitButton的功能
@@ -133,6 +97,9 @@ public class background : MonoBehaviour
 		GameOverTitle.SetActive(true); //設定為ture，顯示GameOverTitle
 		RestartButton.SetActive(true); //RestartButton設定成顯示
 		QuitButton.SetActive(true); //QuitButton設定成顯示
+
+		// send score to server
+		GameServer.sendScoreToServer(token, Score);
 	}
 
 	private void monsterHandle()
